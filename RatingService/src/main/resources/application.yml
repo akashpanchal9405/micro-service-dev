@@ -1,0 +1,17 @@
+server:
+  port: 8084
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/XE # Replace with your Oracle connection details
+    username: SYSTEM # Replace with your Oracle username
+    password: admin # Replace with your Oracle password
+  jpa:
+    hibernate:
+      ddl-auto: update # Or create, create-drop, none
+      dialect: org.hibernate.dialect.OracleDialect # Or a specific dialect for your Oracle version
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  application:
+    name: Rating-Service
