@@ -195,7 +195,29 @@ public class StreamApiApplication {
 
 		boolean anyMatch = empList.stream().anyMatch(emp -> emp.getDept().equals("HR"));
 
-		System.out.println("is there any emp from perticular dept: " + anyMatch);
+//		System.out.println("is there any emp from perticular dept: " + anyMatch);
+
+		// based on any condition if all records satisfied then only allMatch() return
+		// true
+		boolean allMatch = empList.stream().allMatch(emp -> emp.getSalary() > 5000);
+
+//		System.out.println("is there allMatch emp from above condtion: " + allMatch);
+
+		// if based on condition nothing is matched then noneMatch() return true
+
+		boolean noneMatch = empList.stream().noneMatch(emp -> emp.getDept().equals("abc"));
+
+//		System.out.println(noneMatch);
+
+		// limit() only top records will get
+		List<Employee> limit = empList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(3)
+				.collect(Collectors.toList());
+
+//		System.out.println(limit);
+
+		// skip() it will skip number of elements
+		List<Employee> skip = empList.stream().skip(4).collect(Collectors.toList());
+		System.out.println(skip);
 
 	}
 
