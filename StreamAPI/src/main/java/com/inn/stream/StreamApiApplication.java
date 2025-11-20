@@ -191,7 +191,6 @@ public class StreamApiApplication {
 
 		// based on any condition if match found then return true or false using
 		// anyMatch()
-		// anyMath()
 
 		boolean anyMatch = empList.stream().anyMatch(emp -> emp.getDept().equals("HR"));
 
@@ -217,8 +216,28 @@ public class StreamApiApplication {
 
 		// skip() it will skip number of elements
 		List<Employee> skip = empList.stream().skip(4).collect(Collectors.toList());
-		System.out.println(skip);
+//		System.out.println(skip);
 
+		// mapToInt() and sum()
+		Stream<Integer> integerList = Stream.of(1, 2, 4, 5, 67, 4, 3, 3, 6, 3, 3, 2);
+//		int sum = integerList.mapToInt(i -> i).sum();
+//		System.out.println(sum);
+
+		// reduce() -> combine the stream of integer and produce the sum result
+//		Integer reduceSum = integerList.reduce(0, (a, b) -> a + b);
+//		System.out.println(reduceSum);
+
+		// reduce() with methodReference
+//		Optional<Integer> reduceWithMReference = integerList.reduce(Integer::sum);
+//		System.out.println(reduceWithMReference);
+
+		// reduce() to get max number
+//		Optional<Integer> reduceMaxNum = integerList.reduce(Integer::max);
+//		System.out.println(reduceMaxNum);
+		
+		//reduce() to get min number
+		Optional<Integer> reduceMinNum = integerList.reduce(Integer::min);
+		System.out.println(reduceMinNum.get());
 	}
 
 }
