@@ -30,7 +30,7 @@ public class ParallelStreamTest {
 		long start2 = System.currentTimeMillis();
 		double salaryWithStream = empList.stream().map(Employee::getSalary).mapToDouble(sal -> sal).average()
 				.getAsDouble();
-		long end2 = System.currentTimeMillis();
+		long end2 = System.currentTimeMillis(); 
 		System.out.println(salaryWithStream);
 		System.out.println("total time of stream : " + (end2 - start2));
 

@@ -13,7 +13,7 @@ public class OptionalTest {
 		Optional<Object> emptyOptional = Optional.empty();
 		System.out.println(emptyOptional);
 
-		// of() - if we're very sure about email is not null then only use of method, if
+		// of() - if we're very sure about email is not null then only use of() method, if
 		// data is null we'll get NPE
 		// because it will null check internally
 //		Optional<String> emailOptional = Optional.of(customer.getEmail());//NPE
@@ -23,8 +23,7 @@ public class OptionalTest {
 		// ofNullable()
 		// because if internally uses ternary operator if data is null then return empty
 		// Optional object,
-		// if data is there then again if will call of() and this method null check
-		// internally
+		// if data is there then again if will call of() internally and this method null check
 		Optional<String> ofNullableEmail = Optional.ofNullable(customer.getEmail());
 		if (ofNullableEmail.isPresent()) {
 			System.out.println(ofNullableEmail.get());
