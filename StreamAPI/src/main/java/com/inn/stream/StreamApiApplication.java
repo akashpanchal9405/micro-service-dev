@@ -3,10 +3,12 @@ package com.inn.stream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -234,10 +236,11 @@ public class StreamApiApplication {
 		// reduce() to get max number
 //		Optional<Integer> reduceMaxNum = integerList.reduce(Integer::max);
 //		System.out.println(reduceMaxNum);
-		
-		//reduce() to get min number
+
+		// reduce() to get min number
 		Optional<Integer> reduceMinNum = integerList.reduce(Integer::min);
-		System.out.println(reduceMinNum.get());
+//		System.out.println(reduceMinNum.get());
+
 	}
 
 }

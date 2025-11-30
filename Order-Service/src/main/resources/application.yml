@@ -1,13 +1,54 @@
 server:
-  port: 8201
+  port: 8322
 spring:
   application:
     name: Order-Service
-  kafka:
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    topic:
-      name: order_topics
-        
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_service
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+eureka:
+  client:
+    service-url:
+      defaulZone: http://localhost:8761/eureka
+##to enable actuator for check health metrix
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+## actuator can expose all kinds of endpoints so i added * or also we can add "health,metrics,env"
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+## always show the complete health of application
+  endpoint:
+    health:
+      show-details: always
+## Resilience4j properties
+resilience4j:
+  circuitbreaker:
+    instances:
+      inventory:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+  timelimiter:
+    instances:
+      inventory:
+        timeout-duration: 3s
+  retry:
+    instances:
+      inventory:
+        max-attempts: 3
+        wait-duration: 5s

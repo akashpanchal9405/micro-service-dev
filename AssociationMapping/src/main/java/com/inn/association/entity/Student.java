@@ -3,6 +3,8 @@ package com.inn.association.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,7 +43,8 @@ public class Student {
 	// here one student has multiple address
 	// oneToMany example
 
-	@OneToMany(mappedBy = "addId", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference
 	private List<Address> addressList = new ArrayList();
 
 }

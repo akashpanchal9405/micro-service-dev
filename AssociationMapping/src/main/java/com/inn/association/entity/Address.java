@@ -1,5 +1,7 @@
 package com.inn.association.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +26,7 @@ public class Address {
 
 	private String cityName;
 
-	private Integer pincode;
+	private Integer pinCode;
 
 	private String state;
 
@@ -32,5 +34,6 @@ public class Address {
 
 	@ManyToOne
 	@JoinColumn(name = "studId")
+	@JsonBackReference
 	private Student student;
 }

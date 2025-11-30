@@ -1,39 +1,29 @@
 package com.inn.order.controller;
 
-import org.apache.kafka.common.Uuid;
-import org.springframework.http.ResponseEntity;
+import java.util.concurrent.CompletableFuture;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inn.base.dto.Order;
-import com.inn.base.dto.OrderEvent;
-import com.inn.order.kafka.OrderProducer;
+import com.inn.order.dto.OrderRequest;
+import com.inn.order.service.OrderService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/order")
+@RequiredArgsConstructor
 public class OrderController {
 
-	private OrderProducer orderProducer;
+	private final OrderService orderService;
 
-	public OrderController(OrderProducer orderProducer) {
-		super();
-		this.orderProducer = orderProducer;
+	@PostMapping
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public CompletableFuture<String> placeOrder(@RequestBody OrderRequest orderRequest) {
+		return orderService.placeOrder(orderRequest);
 	}
-
-	@PostMapping("/orders")
-	public ResponseEntity<String> placeOrder(@RequestBody Order order) {
-		order.setOrderId(Uuid.randomUuid().toString());
-
-		OrderEvent orderEvent = new OrderEvent();
-		orderEvent.setMessage("Order status is in pending state");
-		orderEvent.setStatus("Pending");
-		orderEvent.setOrder(order);
-
-		orderProducer.sendMessage(orderEvent);
-
-		return ResponseEntity.ok("order placed successfully...");
-	}
-
 }
