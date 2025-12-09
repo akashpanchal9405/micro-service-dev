@@ -1,0 +1,19 @@
+server:
+  port: 8778
+spring:
+  application:
+    name: Spring-Transaction-Example
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_transaction
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+## ENABLE TRANSACTION DEBUG LOGS
+logging:
+  level:
+    '[org.springframework.transaction]': DEBUG
+    '[org.hibernate.transaction]': DEBUG
+    '[org.springframework.orm.jpa.JpaTransactionManager]': DEBUG
